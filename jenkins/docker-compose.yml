@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    privileged: true
+    user: root
+    ports:
+     - 8080:8080
+     - 50000:50000
+    container_name: "jenkins"
+    volumes:
+      - jenkins-docker-cert: /certs/client
+      - jenkins-data: /var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    environments:
+      - DOCKER_TLS_CERTDIR: "/certs"
+    networks:
+      - jenkins
+
+networks:
+  jenkins:
+
+volumes:
+  jenkins-docker-cert:
+  jenkins-data:

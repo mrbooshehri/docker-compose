@@ -1,0 +1,22 @@
+---
+version: '2'
+services:
+  pyload:
+    image: pyload
+    build: /home/mhmd/Repos/github.com/pyload/pyload
+    container_name: pyload
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Tehran
+    volumes:
+      - ./config:/config
+      - ./downloads:/downloads
+    ports:
+      - 8000:8000 # Webinterface
+      - 9666:9666 # Click 'N' Load
+    restart: unless-stopped
+
+#Replace <REPODIR> with the location on the host machine where you have checked out the pyload repository.
+#Replace <STORAGEDIR> with the location on the host machine where you want that downloads will be saved.
+#Replace <USERDIR> with where you want that user data files (configurations) are stored.
